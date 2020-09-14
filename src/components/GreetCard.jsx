@@ -2,32 +2,26 @@ import { render } from "@testing-library/react";
 import React, { useState } from "react";
 
 export default function GreetCard(props) {
-  const [firstName, setFirstName] = useState("Mary");
-  const [surName, setSurName] = useState("Poppins");
-
-  function handleFirstNameChange(e) {
-    setFirstName(e.target.value);
-  }
-  function handleSurNameChange(e) {
-    setSurName(e.target.value);
-  }
-
+  const firstName = useFormInput("Mary");
+  const surName = useFormInput("Poppings");
   return (
     <section>
       <p>
-        <input
-          name="firstName"
-          value={firstName}
-          onChange={handleFirstNameChange}
-        ></input>
+        <input {...firstName} />{" "}
       </p>
       <p>
-        <input
-          name="surName"
-          value={surName}
-          onChange={handleSurNameChange}
-        ></input>
+        <input {...surName} />
       </p>
     </section>
   );
+}
+function useFormInput(initValue) {
+  const [value, setValue] = useState(initValue);
+  function handleValueChange(e) {
+    setValue(e.target.value);
+  }
+  return {
+    value,
+    onChange: handleValueChange,
+  };
 }
