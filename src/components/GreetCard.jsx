@@ -1,9 +1,11 @@
 import { render } from "@testing-library/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function GreetCard(props) {
   const firstName = useFormInput("Mary");
   const surName = useFormInput("Poppings");
+
+  const width = useWidowsWidth();
   return (
     <section>
       <p>
@@ -11,6 +13,9 @@ export default function GreetCard(props) {
       </p>
       <p>
         <input {...surName} />
+      </p>
+      <p>
+        <h1>{width}</h1>
       </p>
     </section>
   );
@@ -24,4 +29,16 @@ function useFormInput(initValue) {
     value,
     onChange: handleValueChange,
   };
+}
+
+function useWidowsWidth() {
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
+  return width;
 }
