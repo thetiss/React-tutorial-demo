@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import Child from "./components/Child";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      userName: "Mary",
+    };
+    console.log("constructor");
+  }
+  componentWillMount() {
+    console.log("componentWillMount");
+  }
+  componentDidMount() {
+    console.log("componentDidMount");
+  }
+  componentWillReceiveProps() {
+    console.log("componentWillReceiveProps");
+  }
+  shouldComponentUpdate(prevProps, prevState) {
+    console.log("shouldComponentUpdate");
+    return true;
+  }
+  componentWillUpdate() {
+    console.log("componentWillUpdate");
+  }
+  handleChange = () => {
+    this.setState({
+      userName: "Jane",
+    });
+  };
+  render() {
+    console.log("render");
+    return (
+      <React.Fragment>
+        <div>{this.state.userName}</div>
+        <Child userName={this.state.userName} />
+        <button onClick={this.handleChange}>Change State</button>
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
