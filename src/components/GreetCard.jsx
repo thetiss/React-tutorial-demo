@@ -1,29 +1,3 @@
-本文旨在熟悉ReactJS中Lifecycle hook。并根据video中的指导逐步完成demo。
-
-# 阶段一 用Class Component,this.setState() and componentDidMounted()
-
-https://www.youtube.com/watch?v=kVyrzn29QPk
-
-
-
-`<App/>与<Child/>`
-
-1. 实现相同ReactJS lifecycle hook方法。
-
-   **but**
-
-1. `只在<App/>`实现`handleChange()`
-2. console.log时打印会有区别。
-
-
-
-# 阶段二 用useState() and useEffect()
-
-In 2018,At React Conf,Dan show us.
-
-## step 1 Basic code(same as /src/componets/GreetCard.jsx)
-
-~~~jsx
 import { render } from "@testing-library/react";
 import React, { useState } from "react";
 
@@ -57,10 +31,3 @@ export default function GreetCard(props) {
     </section>
   );
 }
-
-~~~
-
-
-
-## step 2 Advanced code
-
