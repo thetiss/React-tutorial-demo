@@ -21,6 +21,8 @@ https://www.youtube.com/watch?v=kVyrzn29QPk
 
 In 2018,At React Conf,Dan show us.
 
+ReactJS hook 不能条件渲染，要置于最顶层。
+
 ## step 1 Basic code(same as /src/componets/GreetCard.jsx)
 
 ~~~jsx
@@ -64,7 +66,9 @@ export default function GreetCard(props) {
 
 ## step 2 Advanced code
 
-customer hook **useFormInput**.Via this,different components can share data.
+custom hook **useFormInput**.Via this,different components can share data.
+
+By convention,custom hook like this : **useXXX()** 
 
 ~~~jsx
 import { render } from "@testing-library/react";
@@ -84,7 +88,7 @@ export default function GreetCard(props) {
     </section>
   );
 }
-function useFormInput(initValue) {
+function useFormInput(initValue) {//custom hook example
   const [value, setValue] = useState(initValue);
   function handleValueChange(e) {
     setValue(e.target.value);
@@ -146,6 +150,41 @@ function useWidowsWidth() {
 }
 
 ~~~
+
+
+
+# Demo-Couter
+
+> 在Each Button上，给onClick绑定hook
+
+~~~jsx
+import React, { useState, useEffect } from "react";
+function Counter() {
+  const [count, setCount] = useState(0);
+  function handleClick(byValue) {
+    setCount(count + byValue);
+  }
+  return (
+    <div>
+      <h1>You have clicked {count} 次</h1>
+      <button onClick={() => handleClick(1)}>Add</button>
+      <button onClick={() => handleClick(-1)}>Del</button>
+    </div>
+  );
+}
+
+export default Counter;
+~~~
+
+
+
+## 错误尝试
+
+思路：1 封装useButton组件，用ADD 或DEL来判断增减。
+
+BUT: HOOK 不支持条件渲染，必须在顶层实现。
+
+结果：无法实现。
 
 
 

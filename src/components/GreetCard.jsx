@@ -6,6 +6,10 @@ export default function GreetCard(props) {
   const surName = useFormInput("Poppings");
 
   const width = useWidowsWidth();
+  //使用useEffect()动态更改网页title
+  useEffect(() => {
+    document.title = firstName.value + " " + surName.value;
+  });
   return (
     <section>
       <p>
