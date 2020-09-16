@@ -163,6 +163,66 @@ function useWidowsWidth() {
 
 ~~~
 
+# React Hooks Demo-tutorial
+
+1. feat custom hook
+2. feat useEffect() return width
+3. feat useEffect() use DOM' API
+
+~~~jsx
+import React, { useState, useEffect } from "react";
+//functional component
+export default function Author() {
+  const firstName = useInputValue("Mary");
+  const surName = useInputValue("Poppings");
+  const width = useWindowWidth();
+  //在useEffect()中直接调用DOM的API
+  useEffect(() => {
+    document.title = firstName.value + " " + surName.value;
+  });
+  return (
+    <div>
+      <p>
+        {" "}
+        <input {...firstName} />
+      </p>
+      <p>
+        {" "}
+        <input {...surName} />
+      </p>
+      <p>
+        {" "}
+        <h1>{width}</h1>
+      </p>
+    </div>
+  );
+}
+//custom hook return {}
+function useInputValue(initialValue) {
+  const [value, setValue] = useState(initialValue);
+  function handleInputValueChange(e) {
+    setValue(e.target.value);
+  }
+  return {
+    value,
+    onChange: handleInputValueChange,
+  };
+}
+//custom hook return width
+function useWindowWidth() {
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleWidthChange = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleWidthChange);
+    return () => {
+      window.removeEventListener("resize", handleWidthChange);
+    };
+  });
+  return width;
+}
+
+~~~
+
 
 
 # React Hooks Demo-Couter #only useState()
@@ -264,11 +324,11 @@ Side-effects can happen in response to Redux actions. For example, when a user c
 
 通过本例，入门useEffect()使用。在本例中，联想理解：
 
-- mount-birth-only once
+- mount--birth--only once
 
-- update-learn sth and mistake-many times
+- update--learn sth and mistake--many times
 
-- unmount-death-only once
+- unmount--death--only once
 
 1. feat: 区别mount，update，unmount
 
@@ -278,9 +338,9 @@ Side-effects can happen in response to Redux actions. For example, when a user c
 
 通过useEffect(,nextProps)来区分，nextProps=[]：只执行1次。nextProps=[const]：只执行1次。nextProps不写，则每次均执行。
 
-2. 当growth=40时，先return，再useEffect()主体,nirvana=false。再return ,document.title，主体，nirvana=true。本useEffect()被执行2次。之前(<40)、之后(>40)均是一次。
+3. 当growth=40时，先return，再useEffect()主体,nirvana=false。再return ,document.title，主体，nirvana=true。本useEffect()被执行2次。之前(<40)、之后(>40)均只执行一次。
 
-   <img src="C:\Users\chenh\Desktop\react\0 img\learn from youtube\img\image-20200916152348839.png" alt="image-20200916152348839" style="zoom:67%;" />
+<img src="C:\Users\chenh\Desktop\react\0 img\learn from youtube\img\image-20200916152348839.png" alt="image-20200916152348839" style="zoom:67%;" />
 
 ~~~jsx
 import React, { useState, useEffect } from "react";
