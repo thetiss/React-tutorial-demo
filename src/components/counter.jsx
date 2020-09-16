@@ -4,6 +4,9 @@ function Counter() {
   function handleClick(byValue) {
     setCount(count + byValue);
   }
+  useEffect(() => {
+    document.title = "clicked #" + count + " times";
+  });
   return (
     <div>
       <h1>You have clicked {count} 次</h1>

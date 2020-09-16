@@ -4,12 +4,16 @@ import "./index.css";
 import App from "./App";
 import Greet from "./components/GreetCard";
 import Counter from "./components/counter";
+import Growup from "./components/Growup";
 import * as serviceWorker from "./serviceWorker";
 
-// ReactDOM.render(<App />, document.getElementById("root"));
+//默认APP
+//ReactDOM.render(<App />, document.getElementById("root"));
 //Hook 入门
 //ReactDOM.render(<Greet />, document.getElementById("root"));
 //Hook 重构Counter
-ReactDOM.render(<Counter />, document.getElementById("root"));
+//ReactDOM.render(<Counter />, document.getElementById("root"));
+//Hook useEffect() Advanced learnning
+ReactDOM.render(<Growup />, document.getElementById("root"));
 
 serviceWorker.unregister();
